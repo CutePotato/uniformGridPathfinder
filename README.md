@@ -27,8 +27,10 @@ This project is a prototype and could be improved applying Steve Rabin and Ferna
 
 # Credits
 
+* Original repository this project is based on [Hierarchical Pathfinding](https://github.com/hugoscurti/hierarchical-pathfinding/tree/master) from Hugo Scurti.
+
 * HPA* was introduced in [this paper](http://www.cs.ualberta.ca/~mmueller/ps/hpastar.pdf) written by Botea, Müller, and Schaeffer.
 
-* All .map and .scen files used for testing come from Moving AI's [2d Pathfinding benchmark sets](https://movingai.com/benchmarks/grids.html)
+* JPS was introduced in [JPS](http://users.cecs.anu.edu.au/~dharabor/data/papers/harabor-grastien-aaai11.pdf) presented by Daniel Harabor and Alban Grastien.
 
 * The Priority Queue used in this project comes from BlueRaja's [High Speed Priority Queue for C#](https://github.com/BlueRaja/High-Speed-Priority-Queue-for-C-Sharp).  All files in folder **Priority Queue** comes from the repo's **Priority Queue** folder.
