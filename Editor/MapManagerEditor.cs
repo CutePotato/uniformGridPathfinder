@@ -19,15 +19,9 @@ namespace HierarchicalJPS.Editor
             
             var map = (MapManager)target;
             
-            if (GUILayout.Button("Baking Surfaces"))
-            {
-                map.StartBakingSurfaces();
-            }
-            
             if (GUILayout.Button("Find Path"))
             {
-                _path = map.GetPath(new Vector3(4.5f, 0, -4.5f), new Vector3(-10.5f, 2, 10.5f));
-                // _path = map.GetPath(new Vector3(4.5f, 0, -4.5f), new Vector3(-4.5f, 0, -4.5f));
+                _path = map.GetPath(map.startPosition, map.endPosition);
             }
             
         }

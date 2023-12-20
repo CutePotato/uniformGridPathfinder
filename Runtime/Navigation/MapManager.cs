@@ -19,6 +19,10 @@ namespace HierarchicalJPS.Navigation
         [ReadOnly] public bool baked = false;
         public LineRenderer linePath;
         public PlayerInput playerInput;
+#if UNITY_EDITOR
+        public Vector3 startPosition = new Vector3(4.5f, 0, -4.5f);
+        public Vector3 endPosition = new Vector3(-10.5f, 2, 10.5f);
+#endif
 
         private void Start()
         {

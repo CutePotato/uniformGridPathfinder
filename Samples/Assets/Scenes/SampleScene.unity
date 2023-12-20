@@ -301,6 +301,8 @@ MonoBehaviour:
   baked: 0
   linePath: {fileID: 125072617}
   playerInput: {fileID: 125072616}
+  startPosition: {x: 4.5, y: 0, z: -4.5}
+  endPosition: {x: -10.5, y: 2, z: 10.5}
 --- !u!4 &125072615
 Transform:
   m_ObjectHideFlags: 0
