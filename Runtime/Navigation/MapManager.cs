@@ -24,7 +24,7 @@ namespace HierarchicalJPS.Navigation
         public Vector3 endPosition = new Vector3(-10.5f, 2, 10.5f);
 #endif
 
-        private void Start()
+        protected virtual void Start()
         {
             _addedNodes = new List<Node>();
             StartBakingSurfaces();
