@@ -19,7 +19,7 @@ namespace HierarchicalJPS.Navigation
         private Vector3[] _initObstacles;
         [ReadOnly] public bool baked = false;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             data = new Data(transform.position, size);
             InitObstacles();
