@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.Skills;
 using HierarchicalJPS.HPA;
-using HierarchicalJPS.Navigation;
 using HierarchicalJPS.Samples.Assets.Scripts.AI.Skills;
+using HierarchicalJPS.Samples.Assets.Scripts.Navigation;
 using HierarchicalJPS.Samples.Assets.Scripts.UI;
 using UnityEngine;
 

@@ -1,5 +1,6 @@
 ﻿using FSM;
 using HierarchicalJPS.Navigation;
+using HierarchicalJPS.Samples.Assets.Scripts.Navigation;
 
 namespace HierarchicalJPS.Samples.Assets.Scripts.States
 {
