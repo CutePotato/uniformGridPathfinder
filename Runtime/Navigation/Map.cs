@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace HierarchicalJPS.Navigation
 {
-    public class MapManager : SingletonMonobehaviour<MapManager>
+    public class Map : MonoBehaviour
     {
         public static readonly Vector3 Offset = new(.5f, 0, .5f);
         

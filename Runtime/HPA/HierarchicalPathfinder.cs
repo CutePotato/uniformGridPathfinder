@@ -7,7 +7,7 @@ namespace HierarchicalJPS.HPA
 {
     public static class HierarchicalPathfinder
     {
-        public static LinkedList<Edge> FindHierarchicalPath(MapManager graph, Vector3 start, Vector3 dest)
+        public static LinkedList<Edge> FindHierarchicalPath(Map graph, Vector3 start, Vector3 dest)
         {
             if (start.Equals(dest)) return new LinkedList<Edge>();
             Node nStart, nDest;

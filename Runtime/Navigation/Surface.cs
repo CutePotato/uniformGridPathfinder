@@ -18,11 +18,13 @@ namespace HierarchicalJPS.Navigation
         public List<Transform> obstacles = new();
         private Vector3[] _initObstacles;
         [ReadOnly] public bool baked = false;
+        private Map _map;
 
         protected virtual void Awake()
         {
             data = new Data(transform.position, size);
             InitObstacles();
+            _map = GetComponentInParent<Map>();
         }
 
         public void Bake()
@@ -148,7 +150,7 @@ namespace HierarchicalJPS.Navigation
             }
             InitObstacles();
             SetObstacles();
-            MapManager.Instance.UpdateSurfacesLinkNodes();
+            _map.UpdateSurfacesLinkNodes();
         }
     }
 }

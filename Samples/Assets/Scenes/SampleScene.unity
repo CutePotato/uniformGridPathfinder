@@ -239,11 +239,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 125072615}
-  - component: {fileID: 125072614}
+  - component: {fileID: 125072621}
   - component: {fileID: 125072616}
   - component: {fileID: 125072618}
   - component: {fileID: 125072617}
   - component: {fileID: 125072619}
+  - component: {fileID: 125072620}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -251,58 +252,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &125072614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125072613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41116965e07b40de9402f6300c7cd9ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  links:
-  - activated: 1
-    autoUpdate: 1
-    agentTypeID: 0
-    startTransform: {fileID: 1895740102}
-    startPoint: {x: -4.5, y: 0, z: 2.5}
-    endTransform: {fileID: 2009930249}
-    endPoint: {x: -5.5, y: 1, z: 2.5}
-    bidirectional: 1
-    costModifier: 1
-    lenght: 1
-  - activated: 1
-    autoUpdate: 1
-    agentTypeID: 0
-    startTransform: {fileID: 1897137023}
-    startPoint: {x: -4.5, y: 0, z: -2.5}
-    endTransform: {fileID: 1495337576}
-    endPoint: {x: -5.5, y: 1, z: -2.5}
-    bidirectional: 1
-    costModifier: 1
-    lenght: 1
-  - activated: 1
-    autoUpdate: 1
-    agentTypeID: 0
-    startTransform: {fileID: 1912712280}
-    startPoint: {x: -13.5, y: 1, z: 4.5}
-    endTransform: {fileID: 1303743224}
-    endPoint: {x: -13.5, y: 2, z: 5.5}
-    bidirectional: 1
-    costModifier: 1
-    lenght: 1
-  surfaces:
-  - {fileID: 508389309}
-  - {fileID: 730147047}
-  - {fileID: 691166126}
-  baked: 0
-  linePath: {fileID: 125072617}
-  playerInput: {fileID: 125072616}
-  startPosition: {x: 4.5, y: 0, z: -4.5}
-  endPosition: {x: -10.5, y: 2, z: 10.5}
 --- !u!4 &125072615
 Transform:
   m_ObjectHideFlags: 0
@@ -482,6 +431,110 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 125072616}
   player: {fileID: 7662358046018598266}
+--- !u!114 &125072620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125072613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41116965e07b40de9402f6300c7cd9ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  links:
+  - activated: 1
+    autoUpdate: 1
+    agentTypeID: 0
+    startTransform: {fileID: 1895740102}
+    startPoint: {x: -4.5, y: 0, z: 2.5}
+    endTransform: {fileID: 2009930249}
+    endPoint: {x: -5.5, y: 1, z: 2.5}
+    bidirectional: 1
+    costModifier: 1
+    lenght: 1
+  - activated: 1
+    autoUpdate: 1
+    agentTypeID: 0
+    startTransform: {fileID: 1897137023}
+    startPoint: {x: -4.5, y: 0, z: -2.5}
+    endTransform: {fileID: 1495337576}
+    endPoint: {x: -5.5, y: 1, z: -2.5}
+    bidirectional: 1
+    costModifier: 1
+    lenght: 1
+  - activated: 1
+    autoUpdate: 1
+    agentTypeID: 0
+    startTransform: {fileID: 1912712280}
+    startPoint: {x: -13.5, y: 1, z: 4.5}
+    endTransform: {fileID: 1303743224}
+    endPoint: {x: -13.5, y: 2, z: 5.5}
+    bidirectional: 1
+    costModifier: 1
+    lenght: 1
+  surfaces:
+  - {fileID: 508389309}
+  - {fileID: 730147047}
+  - {fileID: 691166126}
+  baked: 0
+  linePath: {fileID: 125072617}
+  playerInput: {fileID: 125072616}
+  startPosition: {x: 4.5, y: 0, z: -4.5}
+  endPosition: {x: -10.5, y: 2, z: 10.5}
+--- !u!114 &125072621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125072613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8545e8afe0f493882d2793bfe76df9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  links:
+  - activated: 1
+    autoUpdate: 1
+    agentTypeID: 0
+    startTransform: {fileID: 1895740102}
+    startPoint: {x: -4.5, y: 0, z: 2.5}
+    endTransform: {fileID: 2009930249}
+    endPoint: {x: -5.5, y: 1, z: 2.5}
+    bidirectional: 1
+    costModifier: 1
+    lenght: 1
+  - activated: 1
+    autoUpdate: 1
+    agentTypeID: 0
+    startTransform: {fileID: 1897137023}
+    startPoint: {x: -4.5, y: 0, z: -2.5}
+    endTransform: {fileID: 1495337576}
+    endPoint: {x: -5.5, y: 1, z: -2.5}
+    bidirectional: 1
+    costModifier: 1
+    lenght: 1
+  - activated: 1
+    autoUpdate: 1
+    agentTypeID: 0
+    startTransform: {fileID: 1912712280}
+    startPoint: {x: -13.5, y: 1, z: 4.5}
+    endTransform: {fileID: 1303743224}
+    endPoint: {x: -13.5, y: 2, z: 5.5}
+    bidirectional: 1
+    costModifier: 1
+    lenght: 1
+  surfaces:
+  - {fileID: 508389309}
+  - {fileID: 730147047}
+  - {fileID: 691166126}
+  baked: 0
+  linePath: {fileID: 125072617}
+  playerInput: {fileID: 125072616}
+  startPosition: {x: 4.5, y: 0, z: -4.5}
+  endPosition: {x: -10.5, y: 2, z: 10.5}
 --- !u!1 &188261879
 GameObject:
   m_ObjectHideFlags: 0

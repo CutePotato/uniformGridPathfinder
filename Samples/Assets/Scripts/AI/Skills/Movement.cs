@@ -2,8 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Assets.Scripts.Skills;
-using HierarchicalJPS.HPA;
-using HierarchicalJPS.Navigation;
+using HierarchicalJPS.Samples.Assets.Scripts.Navigation;
 using HierarchicalJPS.Samples.Assets.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
