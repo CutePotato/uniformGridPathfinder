@@ -134,8 +134,11 @@ namespace HierarchicalJPS.Navigation
 
                 e2 = new Edge(n2, n1, EdgeType.INTRA, new LinkedList<Edge>(path.Reverse()));
 
-                //TODO: real distance = sum of all path nodes
-                float weight = Vector3.Distance(n1.pos, n2.pos);
+                float weight = 0;
+                foreach (var edge in path)
+                {
+                    weight += edge.weight;
+                }
 
                 //Update weights
                 e1.weight = weight;
