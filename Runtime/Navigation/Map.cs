@@ -30,7 +30,7 @@ namespace HierarchicalJPS.Navigation
             StartBakingSurfaces();
         }
 
-        public void StartBakingSurfaces()
+        public virtual void StartBakingSurfaces()
         {
             baked = false;
             
@@ -41,7 +41,7 @@ namespace HierarchicalJPS.Navigation
             baked = true;
         }
         
-        private void CreateSurfacesLinkNodes()
+        public virtual void CreateSurfacesLinkNodes()
         {
             foreach(var link in links)
             {
