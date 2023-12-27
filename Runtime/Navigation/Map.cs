@@ -30,7 +30,7 @@ namespace HierarchicalJPS.Navigation
             StartBakingSurfaces();
         }
 
-        public void StartBakingSurfaces()
+        public virtual void StartBakingSurfaces()
         {
             baked = false;
             
@@ -41,7 +41,7 @@ namespace HierarchicalJPS.Navigation
             baked = true;
         }
         
-        private void CreateSurfacesLinkNodes()
+        public virtual void CreateSurfacesLinkNodes()
         {
             foreach(var link in links)
             {
@@ -88,7 +88,7 @@ namespace HierarchicalJPS.Navigation
             baked = true;
         }
         
-        private void BuildSurfacesConnections()
+        protected void BuildSurfacesConnections()
         {
             //Add Intra edges for every border nodes and pathfind between them
             for (int i = 0; i < surfaces.Length; ++i)
