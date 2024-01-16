@@ -1,5 +1,6 @@
-﻿using FSM;
+﻿using HierarchicalJPS.FSM;
 using HierarchicalJPS.Samples.Assets.Scripts.AI;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace HierarchicalJPS.Samples.Assets.Scripts.States
@@ -23,7 +24,7 @@ namespace HierarchicalJPS.Samples.Assets.Scripts.States
             {
                 GetInitialState();
             }
-            runningState.Update();
+            runningState.Update(Time.deltaTime);
         }
 
         private void LateUpdate()

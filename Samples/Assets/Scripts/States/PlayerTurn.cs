@@ -1,4 +1,4 @@
-﻿using FSM;
+﻿using HierarchicalJPS.FSM;
 using HierarchicalJPS.Samples.Assets.Scripts.AI;
 using HierarchicalJPS.Samples.Assets.Scripts.UI;
 using UnityEngine;
@@ -42,7 +42,7 @@ namespace HierarchicalJPS.Samples.Assets.Scripts.States
             
         }
 
-        public override void Update()
+        public override void Update(float deltaTime)
         {
             
         }

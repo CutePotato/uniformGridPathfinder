@@ -1,14 +1,13 @@
 {
   "name": "es.markozoranovich.hierarchicaljps",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "displayName": "HierarchicalJPS",
   "description": "Jump point search navigation in hierarchical grid layout",
   "unity": "2022.3",
   "unityRelease": "0f1",
   "dependencies": {
     "com.unity.textmeshpro": "3.0.0",
-    "com.unity.inputsystem": "1.7.0",
-    "es.markozoranovich.finitestatemachine": "1.0.0"
+    "com.unity.inputsystem": "1.7.0"
   },
   "documentationUrl": "https://markozoranovich.es/",
   "changelogUrl": "https://markozoranovich.es/changelog.html",

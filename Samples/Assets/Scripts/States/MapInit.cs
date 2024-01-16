@@ -1,5 +1,4 @@
-﻿using FSM;
-using HierarchicalJPS.Navigation;
+﻿using HierarchicalJPS.FSM;
 using HierarchicalJPS.Samples.Assets.Scripts.Navigation;
 
 namespace HierarchicalJPS.Samples.Assets.Scripts.States
@@ -28,7 +27,7 @@ namespace HierarchicalJPS.Samples.Assets.Scripts.States
             
         }
 
-        public override void Update()
+        public override void Update(float deltaTime)
         {
             if(_map.baked) machine.SetState(((GameStateManager)machine).playerTurn);
         }
