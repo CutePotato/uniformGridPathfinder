@@ -89,7 +89,7 @@ namespace HierarchicalJPS.HPA
             return forcedNodes;
         }
 
-        private void NaturalNodes(ref List<Edge> forcedNodes)
+        public void NaturalNodes(ref List<Edge> forcedNodes)
         {
             var validEdges = end.edges.Where(e => (e.direction & direction) == e.direction && e.end.obstacle == false);
             forcedNodes.AddRange(validEdges);
