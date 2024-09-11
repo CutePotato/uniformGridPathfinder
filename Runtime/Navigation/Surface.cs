@@ -55,7 +55,7 @@ namespace HierarchicalJPS.Navigation
                     var step = new Vector3(i, 0, j);
                     var cornerLeftCell = leftBottomCorner + step;
                     Vector3 pos = cornerLeftCell + Offset;
-                    var node = new Node(pos);
+                    var node = new Node(pos, this);
                     Nodes.Add(pos, node);
                 }
             }

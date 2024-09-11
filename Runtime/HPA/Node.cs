@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using HierarchicalJPS.JPS;
+using HierarchicalJPS.Navigation;
 using UnityEngine;
 
 namespace HierarchicalJPS.HPA
@@ -10,10 +11,18 @@ namespace HierarchicalJPS.HPA
         public List<Edge> edges;
         public Node child;
         public bool obstacle = false;
+		public Surface surface;
 
         public Node(Vector3 value)
         {
             pos = value;
+            edges = new List<Edge>();
+        }
+
+		public Node(Vector3 value, Surface surface)
+        {
+            pos = value;
+			this.surface = surface;
             edges = new List<Edge>();
         }
 
