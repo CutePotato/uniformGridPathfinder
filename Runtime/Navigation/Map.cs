@@ -14,7 +14,7 @@ namespace HierarchicalJPS.Navigation
         public static readonly Vector3 Offset = new(.5f, 0, .5f);
         
         public List<Link> links = new();
-        public Surface[] surfaces;
+        public SurfaceBase[] surfaces;
         private List<Node> _addedNodes;
         [ReadOnly] public bool baked = false;
         public LineRenderer linePath;
@@ -96,7 +96,7 @@ namespace HierarchicalJPS.Navigation
         }
 
         ///Intra edges are edges that lives inside surfaces(linkedNodes)
-        private void GenerateIntraEdges(Surface c)
+        private void GenerateIntraEdges(SurfaceBase c)
         {
             int i, j;
             Node n1, n2;
@@ -167,7 +167,7 @@ namespace HierarchicalJPS.Navigation
         /// </summary>
         public void InsertNodes(Vector3 start, Vector3 dest, out Node nStart, out Node nDest)
         {
-            Surface cStart, cDest;
+            SurfaceBase cStart, cDest;
             Node newStart, newDest;
             var floorStart = Vector3Int.FloorToInt(start) + Offset;
             var floorDest = Vector3Int.FloorToInt(dest) + Offset;
@@ -239,7 +239,7 @@ namespace HierarchicalJPS.Navigation
         /// Connect the grid tile to borders by creating a new node
         /// </summary>
         /// <returns>The node created</returns>
-        private Node ConnectToBorder(Vector3 pos, Surface c, Node child)
+        private Node ConnectToBorder(Vector3 pos, SurfaceBase c, Node child)
         {
             Node newNode;
 
