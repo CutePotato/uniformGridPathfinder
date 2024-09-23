@@ -32,7 +32,7 @@ namespace HierarchicalJPS.Navigation
             baked = true;
         }
 
-        private void CreateNodes()
+        protected void CreateNodes()
         {
             Nodes = new Dictionary<Vector3, Node>();
 

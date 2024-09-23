@@ -11,7 +11,7 @@ namespace HierarchicalJPS.HPA
         public List<Edge> edges;
         public Node child;
         public bool obstacle = false;
-		public Surface surface;
+		public SurfaceBase surface;
 
         public Node(Vector3 value)
         {
@@ -19,7 +19,7 @@ namespace HierarchicalJPS.HPA
             edges = new List<Edge>();
         }
 
-		public Node(Vector3 value, Surface surface)
+		public Node(Vector3 value, SurfaceBase surface)
         {
             pos = value;
 			this.surface = surface;
