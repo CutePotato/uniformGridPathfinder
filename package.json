@@ -1,6 +1,6 @@
 {
   "name": "es.markozoranovich.hierarchicaljps",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "displayName": "HierarchicalJPS",
   "description": "Jump point search navigation in hierarchical grid layout",
   "unity": "2022.3",
