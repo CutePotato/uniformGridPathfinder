@@ -1,7 +1,7 @@
 {
-  "name": "es.markozoranovich.hierarchicaljps",
-  "version": "1.0.12",
-  "displayName": "HierarchicalJPS",
+  "name": "com.cutepotato.uniformgridpathfinder",
+  "version": "1.0.13",
+  "displayName": "Uniform Grid Pathfinder",
   "description": "Jump point search navigation in hierarchical grid layout",
   "unity": "2022.3",
   "unityRelease": "0f1",
@@ -9,12 +9,13 @@
     "com.unity.textmeshpro": "3.0.0",
     "com.unity.inputsystem": "1.7.0"
   },
-  "documentationUrl": "https://markozoranovich.es/",
-  "changelogUrl": "https://markozoranovich.es/changelog.html",
-  "licensesUrl": "https://markozoranovich.es/licensing.html",
+  "documentationUrl": "https://markozoranovich.es/uniform-grid-pathfinder",
+  "changelogUrl": "https://markozoranovich.es/uniform-grid-pathfinder/changelog.html",
+  "licensesUrl": "https://markozoranovich.es/uniform-grid-pathfinder/licensing.html",
   "keywords": [
     "JPS",
-    "HPA*"
+    "HPA*",
+    "A*"
   ],
   "author": {
     "name": "Marko Zoranovich",
