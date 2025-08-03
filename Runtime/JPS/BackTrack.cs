@@ -11,8 +11,7 @@ namespace HierarchicalJPS.JPS
         private readonly Dictionary<Vector3, Edge> _dictionary;
         private readonly LinkedList<Edge> _points;
 
-        // Constructor
-        public BackTrackDFS()
+        public BackTrack()
         {
             _relationChildParent = new Dictionary<Vector3, Vector3?>();
             _points = new LinkedList<Edge>();
