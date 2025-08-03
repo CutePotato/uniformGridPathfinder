@@ -234,7 +234,7 @@ namespace HierarchicalJPS.HPA
             return res;
         }
 
-        private static LinkedList<Edge> RebuildPathJPS(BackTrackDFS track, Vector3 start, Vector3 dest)
+        private static LinkedList<Edge> RebuildPathJPS(BackTrack track, Vector3 start, Vector3 dest)
         {
             return track.DFS(dest, start);
         }
