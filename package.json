@@ -1,6 +1,6 @@
 {
   "name": "com.cutepotato.uniformgridpathfinder",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "displayName": "Uniform Grid Pathfinder",
   "description": "Jump point search navigation in hierarchical grid layout",
   "unity": "2022.3",
