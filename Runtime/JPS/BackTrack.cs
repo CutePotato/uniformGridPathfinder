@@ -5,81 +5,56 @@ using UnityEngine;
 
 namespace HierarchicalJPS.JPS
 {
-    public class BackTrackDFS
+    public class BackTrack
     {
-        // Array of lists for
-        // Adjacency List Representation
-        public Dictionary<Vector3, Vector3?> adj;
-        public Dictionary<Vector3, Edge> dictionary;
-        public Dictionary<Vector3, bool> visited;
-        private LinkedList<Edge> points;
+         private readonly Dictionary<Vector3, Vector3?> _relationChildParent;
+        private readonly Dictionary<Vector3, Edge> _dictionary;
+        private readonly LinkedList<Edge> _points;
 
-        // Constructor
-        public BackTrackDFS()
+        public BackTrack()
         {
-            adj = new Dictionary<Vector3, Vector3?>();
-            points = new LinkedList<Edge>();
-            dictionary = new Dictionary<Vector3, Edge>();
+            _relationChildParent = new Dictionary<Vector3, Vector3?>();
+            _points = new LinkedList<Edge>();
+            _dictionary = new Dictionary<Vector3, Edge>();
         }
 
-        public void AddKey(Vector3 start, Edge edge)
+        /// <summary>
+        /// Add Edge and relation with predecessor
+        /// </summary>
+        /// <param name="jumpPoint">Jump position to register</param>
+        /// <param name="jumpEdge">His edge</param>
+        /// <param name="parent">Parent position</param>
+        public void AddEdge(Vector3 jumpPoint, Edge jumpEdge, Vector3? parent)
         {
-            if (!adj.ContainsKey(start))
+            if (!_dictionary.ContainsKey(jumpPoint))
             {
-                adj.Add(start, null);
+                _dictionary.Add(jumpPoint, jumpEdge);
             }
-            if (!dictionary.ContainsKey(start))
+            if (!_relationChildParent.ContainsKey(jumpPoint))
             {
-                dictionary.Add(start, edge);
-            }
-        }
-
-        // Function to Add an edge into the graph
-        public void AddEdge(Vector3 jumpPoint, Edge jumpEdge, Vector3 parent)
-        {
-            if (!dictionary.ContainsKey(jumpPoint))
-            {
-                dictionary.Add(jumpPoint, jumpEdge);
-            }
-            if (!adj.ContainsKey(jumpPoint))
-            {
-                adj.Add(jumpPoint, parent);
+                _relationChildParent.Add(jumpPoint, parent);
                 return;
             }
 
-            adj[jumpPoint] = parent;
+            _relationChildParent[jumpPoint] = parent;
         }
 
-        // A function used by DFS
-        protected void DFSUtil(Vector3 node, Vector3 start)
+        /// <summary>
+        /// Start back tracking path
+        /// </summary>
+        /// <param name="end">Goal position to start back tracking from</param>
+        /// <returns>Return path from start to end</returns>
+        public LinkedList<Edge> Start(Vector3 end)
         {
-            // Mark the current node as visited
-            // and print it
-            visited[node] = true;
-            points.AddFirst(dictionary[node]);
-
-            var parent = adj[node];
-            if (!parent.HasValue) return;
-            // Recur for all the vertices
-            // adjacent to this vertex
-            if (!visited[parent.Value]){
-                DFSUtil(parent.Value, start);
+            Vector3? parent = end;
+            while (parent.HasValue)
+            {
+                _points.AddFirst(_dictionary[parent.Value]);
+                parent = _relationChildParent[parent.Value];
             }
+
+            return _points;
         }
 
-        // The function to do DFS traversal.
-        // It uses recursive DFSUtil()
-        public LinkedList<Edge> DFS(Vector3 end, Vector3 start)
-        {
-            // Mark all the vertices as not visited
-            // (set as false by default in c#)
-            visited = adj.ToDictionary(pair => pair.Key, pair => { return false; });
-
-            // Call the recursive helper function
-            // to print DFS traversal
-            DFSUtil(end, start);
-
-            return points;
-        }
     }
 }
