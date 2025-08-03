@@ -34,7 +34,10 @@ namespace HierarchicalJPS.HPA
             SetDirection();
         }
 
-        public void SetDirection() {
+        /// <summary>
+        /// Set edge direction using start and end position
+        /// </summary>
+        private void SetDirection() {
             if (start == null || end == null) return;
             Vector3Int vectorDir = MathHelper.FloorToInt(end.pos - start.pos);
             if (vectorDir.x >= 1 && vectorDir.z >= 1){
@@ -71,6 +74,10 @@ namespace HierarchicalJPS.HPA
             }
         }
         
+        /// <summary>
+        /// Gets the neighbors that are valid for edge end position
+        /// </summary>
+        /// <returns>Returns valid neighbors</returns>
         public IEnumerable<Edge> PrunedNeighbors()
         {
             var forcedNodes = new List<Edge>();
@@ -89,12 +96,21 @@ namespace HierarchicalJPS.HPA
             return forcedNodes;
         }
 
+        /// <summary>
+        /// Add edges that are natural to current edge direction to forcedNodes 
+        /// </summary>
+        /// <param name="forcedNodes">Forced nodes</param>
         public void NaturalNodes(ref List<Edge> forcedNodes)
         {
             var validEdges = end.edges.Where(e => (e.direction & direction) == e.direction && e.end.obstacle == false);
             forcedNodes.AddRange(validEdges);
         }
 
+        /// <summary>
+        /// Get edges that must be added to presence of obstacles
+        /// </summary>
+        /// <param name="obstacles">Obstacles in vicinity</param>
+        /// <param name="forcedNodes">Container for edges that are forced by obstacles</param>
         private void ForcedNodes(IEnumerable<Edge> obstacles, ref List<Edge> forcedNodes)
         {
             var dirs = Pathfinder.SplitDiagonalDirection(direction);
@@ -109,6 +125,10 @@ namespace HierarchicalJPS.HPA
             }
         }
 
+        /// <summary>
+        /// Get obstacles presented in vicinity of the edge and that are not in same direction
+        /// </summary>
+        /// <returns>Returns obstacles presented in vicinity of the edge</returns>
         private IEnumerable<Edge> GetCardinalObstaclesExcludingSameDirection()
         {
             var cardinals = Pathfinder.cardinals;
@@ -119,6 +139,10 @@ namespace HierarchicalJPS.HPA
             );
         }
 
+        /// <summary>
+        /// Path cost between both nodes in this edge
+        /// </summary>
+        /// <returns>Returns path cost</returns>
         public float GetUnderlyingPathCost()
         {
             float cost = 0;
