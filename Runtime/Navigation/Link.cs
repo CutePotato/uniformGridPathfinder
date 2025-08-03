@@ -7,13 +7,11 @@ namespace HierarchicalJPS.Navigation
     public struct Link
     {
         public bool activated;
-        public bool autoUpdate;
         public int agentTypeID;
         public Transform startTransform;
-        public Vector3 startPoint;
+        [ReadOnly] public Vector3 startPoint;
         public Transform endTransform;
-        public Vector3 endPoint;
-        public bool bidirectional;
+        [ReadOnly] public Vector3 endPoint;
         public float costModifier;
 
 
@@ -27,7 +25,6 @@ namespace HierarchicalJPS.Navigation
         {
             if (!activated) return;
             if (startTransform == null || endTransform == null) activated = false;
-            if (!autoUpdate) return;
             startPoint = startTransform.position;
             endPoint = endTransform.position;
         }

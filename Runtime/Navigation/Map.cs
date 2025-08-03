@@ -11,7 +11,7 @@ namespace HierarchicalJPS.Navigation
 {
     public class Map : MonoBehaviour
     {
-        public static readonly Vector3 Offset = new(.5f, 0, .5f);
+        private static readonly Vector3 Offset = new(.5f, 0, .5f);
         
         public List<Link> links = new();
         public SurfaceBase[] surfaces;
@@ -30,7 +30,7 @@ namespace HierarchicalJPS.Navigation
             StartBakingSurfaces();
         }
 
-        public virtual void StartBakingSurfaces()
+        protected virtual void StartBakingSurfaces()
         {
             baked = false;
             
@@ -40,8 +40,8 @@ namespace HierarchicalJPS.Navigation
             
             baked = true;
         }
-        
-        public virtual void CreateSurfacesLinkNodes()
+
+        protected virtual void CreateSurfacesLinkNodes()
         {
             foreach(var link in links)
             {
@@ -87,8 +87,8 @@ namespace HierarchicalJPS.Navigation
 
             baked = true;
         }
-        
-        protected void BuildSurfacesConnections()
+
+        private void BuildSurfacesConnections()
         {
             //Add Intra edges for every border nodes and pathfind between them
             for (int i = 0; i < surfaces.Length; ++i)
