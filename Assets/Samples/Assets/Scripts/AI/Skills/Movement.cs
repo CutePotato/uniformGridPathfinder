@@ -119,7 +119,6 @@ namespace HierarchicalJPS.Samples.Assets.Scripts.AI.Skills
         private void CancelAction(InputAction.CallbackContext context)
         {
             Cancel();
-            _playerInput.SwitchCurrentActionMap("team");
         }
     }
 }
