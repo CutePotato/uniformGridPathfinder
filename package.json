@@ -21,5 +21,12 @@
     "name": "Marko Zoranovich",
     "email": "marcoafreeman@gmail.com",
     "url": "https://markozoranovich.es"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Pathfinding Example",
+      "description": "Simple demostration of AI agent movement",
+      "path": "Samples~/Assets"
+    }
+  ]
 }
