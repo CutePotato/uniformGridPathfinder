@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace HierarchicalJPS.HPA
 {
-    public class Pathfinder
+    public static class Pathfinder
     {
         /// <summary>
         /// Return all cardinal direction clock wise fashion
@@ -103,7 +103,7 @@ namespace HierarchicalJPS.HPA
             Dictionary<Vector3, float> gScore = new();
 
             SimplePriorityQueue<Edge, float> pq = new();
-            BackTrackDFS trackDFS = new BackTrackDFS();
+            var trackDFS = new BackTrack();
 
             gScore[start.pos] = 0;
             var startEdge = new Edge(null, start, EdgeType.INTRA, 0);

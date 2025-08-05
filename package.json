@@ -30,7 +30,7 @@
   "samples": [
     {
       "displayName": "Pathfinding Example",
-      "description": "Simple demostration of AI agent movement",
+      "description": "Simple demonstration of AI agent movement",
       "path": "Samples~/Assets"
     }
   ]

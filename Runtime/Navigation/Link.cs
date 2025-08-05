@@ -1,4 +1,5 @@
 ﻿using System;
+using HierarchicalJPS.Attribute;
 using UnityEngine;
 
 namespace HierarchicalJPS.Navigation
