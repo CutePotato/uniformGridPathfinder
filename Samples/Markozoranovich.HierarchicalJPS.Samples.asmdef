@@ -1,18 +1,10 @@
 {
-    "name": "Markozoranovich.HierarchicalJPS.Samples",
-    "rootNamespace": "HierarchicalJPS",
-    "references": [
-        "Markozoranovich.HierarchicalJPS",
-        "Unity.InputSystem",
-        "Unity.TextMeshPro"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Markozoranovich.HierarchicalJPS.Samples",
+  "rootNamespace": "HierarchicalJPS.Samples",
+  "references": [
+    "Markozoranovich.HierarchicalJPS",
+    "Unity.InputSystem",
+    "Unity.TextMeshPro"
+  ],
+  "autoReferenced": true
 }
