@@ -26,7 +26,7 @@
     "type": "git",
     "url": "https://github.com/CutePotato/uniformGridPathfinder.git",
     "revision": "v1.0.16"
-  }
+  },
   "samples": [
     {
       "displayName": "Pathfinding Example",
