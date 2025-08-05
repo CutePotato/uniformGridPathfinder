@@ -1,7 +1,14 @@
 {
   "name": "Markozoranovich.HierarchicalJPS",
   "rootNamespace": "HierarchicalJPS",
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
   "autoReferenced": true,
+  "defineConstraints": [],
+  "noEngineReferences": false,
   "references": [
     "Unity.InputSystem"
   ]
