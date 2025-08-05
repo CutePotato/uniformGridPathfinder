@@ -5,5 +5,11 @@
         "Markozoranovich.HierarchicalJPS"
     ],
     "includePlatforms": ["Editor"],
-    "autoReferenced": true
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "noEngineReferences": false
 }
