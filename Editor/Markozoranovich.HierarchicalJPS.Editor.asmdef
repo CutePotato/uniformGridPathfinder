@@ -1,16 +1,9 @@
 {
     "name": "Markozoranovich.HierarchicalJPS.Editor",
-    "rootNamespace": "HierarchicalJPS",
+    "rootNamespace": "HierarchicalJPS.Editor",
     "references": [
         "Markozoranovich.HierarchicalJPS"
     ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+    "includePlatforms": ["Editor"],
+    "autoReferenced": true
 }
