@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace HierarchicalJPS
+namespace UniformGridPathfinder
 {
     [Serializable]
     public struct Data

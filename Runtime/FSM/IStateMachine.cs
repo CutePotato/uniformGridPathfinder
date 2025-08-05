@@ -1,4 +1,4 @@
-﻿namespace HierarchicalJPS.FSM
+﻿namespace UniformGridPathfinder.FSM
 {
     public interface IStateMachine
     {

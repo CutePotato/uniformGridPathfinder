@@ -1,8 +1,8 @@
-using HierarchicalJPS.Navigation;
+using UniformGridPathfinder.Navigation;
 using UnityEditor;
 using UnityEngine;
 
-namespace HierarchicalJPS.Editor
+namespace UniformGridPathfinder.Editor
 {
     [CustomEditor(typeof(Surface))]
     public class SurfaceEditor : UnityEditor.Editor

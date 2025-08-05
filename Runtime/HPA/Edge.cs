@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using HierarchicalJPS.JPS;
-using HierarchicalJPS.Utilities;
+using UniformGridPathfinder.JPS;
+using UniformGridPathfinder.Utilities;
 using UnityEngine;
 
-namespace HierarchicalJPS.HPA
+namespace UniformGridPathfinder.HPA
 {
     public class Edge
     {

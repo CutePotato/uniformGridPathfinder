@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HierarchicalJPS.JPS
+namespace UniformGridPathfinder.JPS
 {
     [Flags]
     public enum Direction {

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.Skills;
-using HierarchicalJPS.HPA;
-using HierarchicalJPS.Samples.Assets.Scripts.AI.Skills;
-using HierarchicalJPS.Samples.Assets.Scripts.Navigation;
-using HierarchicalJPS.Samples.Assets.Scripts.UI;
+using UniformGridPathfinder.HPA;
+using UniformGridPathfinder.Samples.Assets.Scripts.AI.Skills;
+using UniformGridPathfinder.Samples.Assets.Scripts.Navigation;
+using UniformGridPathfinder.Samples.Assets.Scripts.UI;
 using UnityEngine;
 
-namespace HierarchicalJPS.Samples.Assets.Scripts.AI
+namespace UniformGridPathfinder.Samples.Assets.Scripts.AI
 {
     public class Agent : MonoBehaviour
     {

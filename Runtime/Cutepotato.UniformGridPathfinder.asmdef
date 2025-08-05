@@ -1,15 +1,16 @@
 {
-    "name": "Markozoranovich.HierarchicalJPS.Editor",
-    "rootNamespace": "HierarchicalJPS.Editor",
+    "name": "Cutepotato.UniformGridPathfinder",
+    "rootNamespace": "UniformGridPathfinder",
     "references": [
-        "Markozoranovich.HierarchicalJPS"
+        "Unity.InputSystem"
     ],
-    "includePlatforms": ["Editor"],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
+    "versionDefines": [],
     "noEngineReferences": false
 }

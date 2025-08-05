@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace HierarchicalJPS.Utilities
+namespace UniformGridPathfinder.Utilities
 {
     public class SingletonMonobehaviour<T> : MonoBehaviour where T : SingletonMonobehaviour<T>
     {

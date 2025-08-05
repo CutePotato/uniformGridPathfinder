@@ -1,7 +1,7 @@
-﻿using HierarchicalJPS.Utilities;
+﻿using UniformGridPathfinder.Utilities;
 using UnityEngine;
 
-namespace HierarchicalJPS.Samples.Assets.Scripts.Utilities
+namespace UniformGridPathfinder.Samples.Assets.Scripts.Utilities
 {
     public class CameraHelper
     {

@@ -1,10 +1,10 @@
-﻿using HierarchicalJPS.FSM;
-using HierarchicalJPS.Samples.Assets.Scripts.AI;
-using HierarchicalJPS.Samples.Assets.Scripts.UI;
+﻿using UniformGridPathfinder.Samples.Assets.Scripts.AI;
+using UniformGridPathfinder.Samples.Assets.Scripts.UI;
+using UniformGridPathfinder.FSM;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HierarchicalJPS.Samples.Assets.Scripts.States
+namespace UniformGridPathfinder.Samples.Assets.Scripts.States
 {
     public class PlayerTurn : BaseState
     {

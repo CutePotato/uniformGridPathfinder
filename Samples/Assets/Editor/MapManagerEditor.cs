@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using HierarchicalJPS.HPA;
-using HierarchicalJPS.Samples.Assets.Scripts.Navigation;
+using UniformGridPathfinder.HPA;
+using UniformGridPathfinder.Samples.Assets.Scripts.Navigation;
 using UnityEditor;
 using UnityEngine;
 
-namespace HierarchicalJPS.Samples.Assets.Editor
+namespace UniformGridPathfinder.Samples.Assets.Editor
 {
     [CustomEditor(typeof(MapManager))]
     public class MapManagerEditor : UnityEditor.Editor

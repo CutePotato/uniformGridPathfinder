@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HierarchicalJPS.Attribute;
-using HierarchicalJPS.HPA;
-using HierarchicalJPS.Utilities;
+using UniformGridPathfinder.HPA;
+using UniformGridPathfinder.Attribute;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HierarchicalJPS.Navigation
+namespace UniformGridPathfinder.Navigation
 {
     public class Map : MonoBehaviour
     {

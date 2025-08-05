@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace HierarchicalJPS.Attribute
+namespace UniformGridPathfinder.Attribute
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class ReadOnlyAttribute : PropertyAttribute{}

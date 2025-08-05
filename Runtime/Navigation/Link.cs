@@ -1,8 +1,8 @@
 ﻿using System;
-using HierarchicalJPS.Attribute;
+using UniformGridPathfinder.Attribute;
 using UnityEngine;
 
-namespace HierarchicalJPS.Navigation
+namespace UniformGridPathfinder.Navigation
 {
     [Serializable]
     public struct Link

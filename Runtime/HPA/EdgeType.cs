@@ -1,4 +1,4 @@
-﻿namespace HierarchicalJPS.HPA
+﻿namespace UniformGridPathfinder.HPA
 {
     public enum EdgeType
     {

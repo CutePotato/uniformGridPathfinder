@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Skills
+namespace UniformGridPathfinder.Samples.Assets.Scripts.AI.Skills
 {
     public abstract class BaseAbility : IAbility
     {

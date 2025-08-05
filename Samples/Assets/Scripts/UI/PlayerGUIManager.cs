@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.Skills;
-using HierarchicalJPS.Utilities;
 using TMPro;
+using UniformGridPathfinder.Utilities;
+using UniformGridPathfinder.Samples.Assets.Scripts.AI.Skills;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HierarchicalJPS.Samples.Assets.Scripts.UI
+namespace UniformGridPathfinder.Samples.Assets.Scripts.UI
 {
     public class PlayerGUIManager : SingletonMonobehaviour<PlayerGUIManager>
     {

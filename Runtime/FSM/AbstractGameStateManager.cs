@@ -1,7 +1,7 @@
-﻿using HierarchicalJPS.Utilities;
+﻿using UniformGridPathfinder.Utilities;
 using UnityEngine;
 
-namespace HierarchicalJPS.FSM
+namespace UniformGridPathfinder.FSM
 {
     public abstract class AbstractGameStateManager : SingletonMonobehaviour<AbstractGameStateManager>, IStateMachine
     {

@@ -1,8 +1,8 @@
-﻿using HierarchicalJPS.Attribute;
+﻿using UniformGridPathfinder.Attribute;
 using UnityEditor;
 using UnityEngine;
 
-namespace HierarchicalJPS.Editor
+namespace UniformGridPathfinder.Editor
 {
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     public class ReadOnlyPropertyDrawer : PropertyDrawer

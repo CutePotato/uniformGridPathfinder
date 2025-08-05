@@ -1,9 +1,9 @@
-﻿using HierarchicalJPS.FSM;
-using HierarchicalJPS.Samples.Assets.Scripts.AI;
+﻿using UniformGridPathfinder.Samples.Assets.Scripts.AI;
+using UniformGridPathfinder.FSM;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HierarchicalJPS.Samples.Assets.Scripts.States
+namespace UniformGridPathfinder.Samples.Assets.Scripts.States
 {
     public class GameStateManager : AbstractGameStateManager
     {

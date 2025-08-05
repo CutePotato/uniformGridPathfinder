@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using HierarchicalJPS.Attribute;
-using HierarchicalJPS.HPA;
 using UnityEngine;
 
-namespace HierarchicalJPS.Navigation
+namespace UniformGridPathfinder.Navigation
 {
     public class Surface : SurfaceBase
     {

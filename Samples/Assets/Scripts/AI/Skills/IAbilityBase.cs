@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Skills
+﻿namespace UniformGridPathfinder.Samples.Assets.Scripts.AI.Skills
 {
     public interface IAbilityBase
     {

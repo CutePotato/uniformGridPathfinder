@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Assets.Scripts.Skills;
-using HierarchicalJPS.Samples.Assets.Scripts.Navigation;
-using HierarchicalJPS.Samples.Assets.Scripts.Utilities;
+using UniformGridPathfinder.Samples.Assets.Scripts.Utilities;
+using UniformGridPathfinder.Samples.Assets.Scripts.Navigation;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Edge = HierarchicalJPS.HPA.Edge;
+using Edge = UniformGridPathfinder.HPA.Edge;
 
-namespace HierarchicalJPS.Samples.Assets.Scripts.AI.Skills
+namespace UniformGridPathfinder.Samples.Assets.Scripts.AI.Skills
 {
     public class Movement : BaseAbility
     {

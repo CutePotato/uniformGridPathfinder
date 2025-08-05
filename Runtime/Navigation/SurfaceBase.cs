@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using HierarchicalJPS.Attribute;
-using HierarchicalJPS.HPA;
+using UniformGridPathfinder.HPA;
+using UniformGridPathfinder.Attribute;
 using UnityEngine;
 
-namespace HierarchicalJPS.Navigation
+namespace UniformGridPathfinder.Navigation
 {
     public class SurfaceBase : MonoBehaviour
     {

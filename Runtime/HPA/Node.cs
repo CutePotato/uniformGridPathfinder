@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using HierarchicalJPS.JPS;
-using HierarchicalJPS.Navigation;
+using UniformGridPathfinder.JPS;
+using UniformGridPathfinder.Navigation;
 using UnityEngine;
 
-namespace HierarchicalJPS.HPA
+namespace UniformGridPathfinder.HPA
 {
     public class Node
     {

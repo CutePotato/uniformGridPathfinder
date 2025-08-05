@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using HierarchicalJPS.JPS;
+using UniformGridPathfinder.JPS;
 using Priority_Queue;
 using UnityEngine;
 
-namespace HierarchicalJPS.HPA
+namespace UniformGridPathfinder.HPA
 {
     public static class Pathfinder
     {

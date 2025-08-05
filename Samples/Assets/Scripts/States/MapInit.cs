@@ -1,7 +1,7 @@
-﻿using HierarchicalJPS.FSM;
-using HierarchicalJPS.Samples.Assets.Scripts.Navigation;
+﻿using UniformGridPathfinder.FSM;
+using UniformGridPathfinder.Samples.Assets.Scripts.Navigation;
 
-namespace HierarchicalJPS.Samples.Assets.Scripts.States
+namespace UniformGridPathfinder.Samples.Assets.Scripts.States
 {
     public class MapInit : BaseState
     {

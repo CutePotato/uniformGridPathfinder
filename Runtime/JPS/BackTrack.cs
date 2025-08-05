@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using HierarchicalJPS.HPA;
+using UniformGridPathfinder.HPA;
 using UnityEngine;
 
-namespace HierarchicalJPS.JPS
+namespace UniformGridPathfinder.JPS
 {
     public class BackTrack
     {

@@ -1,6 +1,6 @@
-﻿using HierarchicalJPS.Navigation;
+﻿using UniformGridPathfinder.Navigation;
 
-namespace HierarchicalJPS.Samples.Assets.Scripts.Navigation
+namespace UniformGridPathfinder.Samples.Assets.Scripts.Navigation
 {
     public class MapManager : Map
     {
