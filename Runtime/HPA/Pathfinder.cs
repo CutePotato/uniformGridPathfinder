@@ -107,7 +107,7 @@ namespace HierarchicalJPS.HPA
 
             gScore[start.pos] = 0;
             var startEdge = new Edge(null, start, EdgeType.INTRA, 0);
-            trackDFS.AddKey(start.pos, startEdge);
+            trackDFS.AddEdge(start.pos, startEdge, null);
             pq.Enqueue(startEdge, EuclidianDistance(start, goal));
             Edge current;
 
@@ -118,7 +118,7 @@ namespace HierarchicalJPS.HPA
                 if (current.end.pos.Equals(goal.pos))
                 {
                     //Rebuild path and return it
-                    var path = RebuildPathJPS(trackDFS, start.pos, current.end.pos);
+                    var path = RebuildPathJPS(trackDFS, current.end.pos);
                     return path;
                 }
 
@@ -301,7 +301,7 @@ namespace HierarchicalJPS.HPA
         /// <param name="track">Deep first search instance</param>
         /// <param name="dest">Destination</param>
         /// <returns></returns>
-        private static LinkedList<Edge> RebuildPathJPS(BackTrackDFS track, Vector3 dest)
+        private static LinkedList<Edge> RebuildPathJPS(BackTrack track, Vector3 dest)
         {
             return track.Start(dest);
         }
