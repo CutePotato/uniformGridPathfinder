@@ -31,7 +31,7 @@
     {
       "displayName": "Pathfinding Example",
       "description": "Simple demonstration of AI agent movement",
-      "path": "Samples~/Assets"
+      "path": "Samples~/BasicPathfindingExample"
     }
   ]
 }
