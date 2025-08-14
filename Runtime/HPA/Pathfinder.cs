@@ -35,7 +35,7 @@ namespace UniformGridPathfinder.HPA
         }
 
         /// <summary>
-        /// A* pathfinding search used for 
+        /// A* pathfinding between nodes and surfaces
         /// </summary>
         /// <param name="start">Start node</param>
         /// <param name="dest">Final node</param>

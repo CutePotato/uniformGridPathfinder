@@ -1,4 +1,4 @@
-﻿﻿# Hierarchical Jump Point Search Pathfinding
+﻿# Hierarchical Jump Point Search Pathfinding
 
 The motivation of this project is to present a possible solution for turn-based tactical game in regard of Pathfinding.
 
