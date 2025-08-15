@@ -12,9 +12,9 @@ Hopefully, it can be used as a start point for Unity developers that try to deve
 
 This project is a prototype and could be improved by applying Steve Rabin and Fernando Silva work optimizations through [JPS+](http://www.gameaipro.com/GameAIPro2/GameAIPro2_Chapter14_JPS_Plus_An_Extreme_A_Star_Speed_Optimization_for_Static_Uniform_Cost_Grids.pdf)
 
-# How to test
+# Installation Guide
 
-1. Clone the repo
+1. Import the project via **Package Manager** adding GitHub URL
 
 2. Open Sample Scene to Test <br>
    [![Video Explanation](https://i9.ytimg.com/vi_webp/iVV3njkSY-o/mqdefault.webp?v=689e38d5&sqp=CLjy-MQG&rs=AOn4CLDBKooMNpGQbwN5qStQnCN6sj8wLA)](https://youtu.be/iVV3njkSY-o)

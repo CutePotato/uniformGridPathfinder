@@ -87,7 +87,7 @@ namespace UniformGridPathfinder.Navigation
             baked = true;
         }
 
-        private void BuildSurfacesConnections()
+        protected void BuildSurfacesConnections()
         {
             //Add Intra edges for every border nodes and pathfind between them
             for (int i = 0; i < surfaces.Length; ++i)
