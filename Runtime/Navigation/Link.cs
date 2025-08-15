@@ -5,7 +5,7 @@ using UnityEngine;
 namespace UniformGridPathfinder.Navigation
 {
     [Serializable]
-    public struct Link
+    public class Link
     {
         public bool activated;
         public int agentTypeID;
