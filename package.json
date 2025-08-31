@@ -10,8 +10,8 @@
     "com.unity.inputsystem": "1.7.0"
   },
   "documentationUrl": "https://markozoranovich.es/uniform-grid-pathfinder",
-  "changelogUrl": "https://markozoranovich.es/uniform-grid-pathfinder/changelog.html",
-  "licensesUrl": "https://markozoranovich.es/uniform-grid-pathfinder/licensing.html",
+  "changelogUrl": "https://github.com/CutePotato/uniformGridPathfinder/releases",
+  "licensesUrl": "https://github.com/CutePotato/uniformGridPathfinder/blob/main/LICENSE.md",
   "keywords": [
     "JPS",
     "HPA*",
