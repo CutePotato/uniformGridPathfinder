@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UniformGridPathfinder.HPA;
 using UnityEngine;
 
@@ -25,16 +25,7 @@ namespace UniformGridPathfinder.JPS
         /// <param name="parent">Parent position</param>
         public void AddEdge(Vector3 jumpPoint, Edge jumpEdge, Vector3? parent)
         {
-            if (!_dictionary.ContainsKey(jumpPoint))
-            {
-                _dictionary.Add(jumpPoint, jumpEdge);
-            }
-            if (!_relationChildParent.ContainsKey(jumpPoint))
-            {
-                _relationChildParent.Add(jumpPoint, parent);
-                return;
-            }
-
+            _dictionary[jumpPoint] = jumpEdge;
             _relationChildParent[jumpPoint] = parent;
         }
 
@@ -45,9 +36,12 @@ namespace UniformGridPathfinder.JPS
         /// <returns>Return path from start to end</returns>
         public LinkedList<Edge> Start(Vector3 end)
         {
+            _points.Clear();
+            var seen = new HashSet<Vector3>();
             Vector3? parent = end;
             while (parent.HasValue)
             {
+                if (!seen.Add(parent.Value)) throw new System.InvalidOperationException("Cyclic predecessor chain.");
                 _points.AddFirst(_dictionary[parent.Value]);
                 parent = _relationChildParent[parent.Value];
             }

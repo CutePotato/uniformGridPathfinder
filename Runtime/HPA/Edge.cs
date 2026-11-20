@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UniformGridPathfinder.JPS;
 using UniformGridPathfinder.Utilities;
@@ -13,6 +13,7 @@ namespace UniformGridPathfinder.HPA
         public EdgeType type;
         public float weight;
         public Direction direction;
+        public bool IsTransition;
 
         public LinkedList<Edge> UnderlyingPath;
 
@@ -37,43 +38,14 @@ namespace UniformGridPathfinder.HPA
         /// <summary>
         /// Set edge direction using start and end position
         /// </summary>
-        public void SetDirection() {
-            if (start == null || end == null) return;
-            Vector3Int vectorDir = MathHelper.FloorToInt(end.pos - start.pos);
-            if (vectorDir.x >= 1 && vectorDir.z >= 1){
-                direction = Direction.NorthEast;
-                return;
-            }
-            if (vectorDir.x >= 1 && vectorDir.z <= -1){
-                direction = Direction.SouthEast;
-                return;
-            }
-            if (vectorDir.x <= -1 && vectorDir.z >= 1){
-                direction = Direction.NorthWest;
-                return;
-            }
-            if (vectorDir.x <= -1 && vectorDir.z <= -1){
-                direction = Direction.SouthWest;
-                return;
-            }
-            if (vectorDir.x >= 1){
-                direction = Direction.East;
-                return;
-            }
-            if (vectorDir.x <= -1){
-                direction = Direction.West;
-                return;
-            }
-            if (vectorDir.z >= 1){
-                direction = Direction.North;
-                return;
-            }
-            if (vectorDir.z <= -1){
-                direction = Direction.South;
-                return;
-            }
+        public void SetDirection()
+        {
+            if(start==null||end==null)return;
+            var delta=end.pos-start.pos;
+            direction=(delta.x>0?Direction.East:delta.x<0?Direction.West:Direction.None) |
+                (delta.z>0?Direction.North:delta.z<0?Direction.South:Direction.None);
         }
-        
+
         /// <summary>
         /// Gets the neighbors that are valid for edge end position
         /// </summary>

@@ -31,3 +31,7 @@ This project is a prototype and could be improved by applying Steve Rabin and Fe
 * JPS was introduced in [JPS](http://users.cecs.anu.edu.au/~dharabor/data/papers/harabor-grastien-aaai11.pdf) presented by Daniel Harabor and Alban Grastien.
 
 * The Priority Queue used in this project comes from BlueRaja's [High Speed Priority Queue for C#](https://github.com/BlueRaja/High-Speed-Priority-Queue-for-C-Sharp).  All files in folder **Priority Queue** comes from the repo's **Priority Queue** folder.
+
+## Version 1.1: dynamic navigation
+
+See [dynamic navigation contracts and migration](Documentation~/DynamicNavigation.md) and [changelog](CHANGELOG.md). Online JPS, versioned per-region caches, directed links, floor support edits, weighted fallback and bounded reachability are supported. JPS+ is not enabled. Run the regression suite with `dotnet run --project "Tests~/Core/CoreTests.csproj" -c Release`.

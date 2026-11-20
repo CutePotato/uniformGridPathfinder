@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UniformGridPathfinder.JPS;
 using UniformGridPathfinder.Navigation;
 using UnityEngine;
@@ -11,6 +11,10 @@ namespace UniformGridPathfinder.HPA
         public List<Edge> edges;
         public Node child;
         public bool obstacle = false;
+        public bool supported = true;
+        public float traversalCost = 1;
+        public int cellX, cellZ;
+        public CellId Id=>new CellId(surface?.SurfaceId,cellX,cellZ);
 		public SurfaceBase surface;
 
         public Node(Vector3 value)

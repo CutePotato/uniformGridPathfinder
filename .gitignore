@@ -82,3 +82,6 @@ ProjectSettings/
 _site/
 toc.yml
 debug.log
+# Headless test build outputs
+**/bin/
+**/obj/

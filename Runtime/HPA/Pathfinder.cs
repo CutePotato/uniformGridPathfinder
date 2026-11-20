@@ -1,309 +1,170 @@
-﻿using System.Collections.Generic;
-using UniformGridPathfinder.JPS;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 using Priority_Queue;
+using UniformGridPathfinder.JPS;
 using UnityEngine;
 
 namespace UniformGridPathfinder.HPA
 {
+    /// <summary>Search state is query-local. Grid movement forbids corner cutting.</summary>
     public static class Pathfinder
     {
-        /// <summary>
-        /// Return all cardinal direction clock wise fashion
-        /// </summary>
-        public static List<Direction> cardinals = GetCardinalDirections();
-
-        /// <summary>
-        /// Gets euclidean distance from one node to another
-        /// </summary>
-        /// <param name="node1">Start node</param>
-        /// <param name="node2">End node</param>
-        /// <returns>Return euclidean distance from one node to another</returns>
-        public static float EuclidianDistance(Node node1, Node node2)
+        public static List<Direction> cardinals = new List<Direction> { Direction.North, Direction.East, Direction.South, Direction.West };
+        private sealed class Entry { public Node Node; public float G; public Entry(Node n,float g) { Node=n; G=g; } }
+        public static float EuclidianDistance(Node a,Node b) => EuclidianDistance(a.pos,b.pos);
+        public static float EuclidianDistance(Vector3 a,Vector3 b) { var d=b-a; return Mathf.Sqrt(d.x*d.x+d.y*d.y+d.z*d.z); }
+        public static bool IsCardinal(Direction d) { int n=(int)d; return n!=0 && (n&(n-1))==0; }
+        public static Direction[] SplitDiagonalDirection(Direction d)
         {
-            return EuclidianDistance(node1.pos, node2.pos);
+            int n=(int)d,first=n&-n; return new[] { (Direction)first,(Direction)(n-first) };
         }
-
-        /// <summary>
-        ///  Gets euclidean distance from one node to another
-        /// </summary>
-        /// <param name="tile1">Start position</param>
-        /// <param name="tile2">End position</param>
-        /// <returns>Return euclidean distance from one position to another</returns>
-        public static float EuclidianDistance(Vector3 tile1, Vector3 tile2)
+        public static Edge Step(Edge edge,Direction direction) => edge?.end?.edges.Find(e=>!e.IsTransition && e.direction==direction);
+        public static bool Walkable(Node n) => n!=null && n.supported && !n.obstacle;
+        private static bool Finite(float n) => !float.IsNaN(n) && !float.IsInfinity(n);
+        private static Node Raw(Node n,int dx,int dz)
         {
-            return Mathf.Sqrt(Mathf.Pow(tile2.x - tile1.x, 2) + Mathf.Pow(tile2.y - tile1.y, 2) + Mathf.Pow(tile2.z - tile1.z, 2));
-        }
-
-        /// <summary>
-        /// A* pathfinding between nodes and surfaces
-        /// </summary>
-        /// <param name="start">Start node</param>
-        /// <param name="dest">Final node</param>
-        /// <returns>Return a path from the start node to final node</returns>
-        public static LinkedList<Edge> FindPath(Node start, Node dest)
-        {
-            HashSet<Vector3> Visited = new HashSet<Vector3>();
-            Dictionary<Vector3, Edge> Parent = new Dictionary<Vector3, Edge>();
-            Dictionary<Vector3, float> gScore = new Dictionary<Vector3, float>();
-
-            SimplePriorityQueue<Node, float> pq = new SimplePriorityQueue<Node, float>();
-
-            float temp_gCost, prev_gCost;
-
-            gScore[start.pos] = 0;
-            pq.Enqueue(start, EuclidianDistance(start, dest));
-            Node current;
-
-            while (pq.Count > 0)
+            if(n==null)return null;
+            foreach(var e in n.edges)
             {
-                current = pq.Dequeue();
-
-                if (current.pos.Equals(dest.pos))
-                    //Rebuild path and return it
-                    return RebuildPath(Parent, current);
-
-
-                Visited.Add(current.pos);
-
-                //Visit all neighbours through edges going out of node
-                for (int i = 0; i < current.edges.Count; i++)
+                if(e.IsTransition || e.type!=EdgeType.INTER || e.end.surface!=n.surface || Math.Abs(e.end.pos.y-n.pos.y)>.0001f)continue;
+                var delta=e.end.pos-n.pos;
+                if(Math.Sign(delta.x)==dx && Math.Sign(delta.z)==dz)return e.end;
+            }
+            return null;
+        }
+        private static bool Open(Node n,int dx,int dz)=>Walkable(Raw(n,dx,dz));
+        public static bool CanTraverse(Edge e)
+        {
+            if(e==null || !Walkable(e.end) || e.start!=null&&!e.start.supported)return false;
+            if(!Finite(e.weight) || e.weight<0)throw new ArgumentOutOfRangeException(nameof(e.weight),"Navigation costs must be finite and non-negative.");
+            if(e.IsTransition || e.type==EdgeType.INTRA || e.start==null)return true;
+            var d=e.end.pos-e.start.pos;int dx=Math.Sign(d.x),dz=Math.Sign(d.z);
+            return dx==0 || dz==0 || Open(e.start,dx,0)&&Open(e.start,0,dz);
+        }
+        private static LinkedList<Edge> Rebuild(Node start,Node goal,Dictionary<Node,Edge> parents)
+        {
+            var result=new LinkedList<Edge>();var seen=new HashSet<Node>();var current=goal;
+            while(current!=start)
+            {
+                if(!seen.Add(current) || !parents.TryGetValue(current,out var edge))throw new InvalidOperationException("Invalid predecessor chain.");
+                result.AddFirst(edge);current=edge.start;
+            }
+            return result;
+        }
+        public static LinkedList<Edge> FindPath(Node start,Node goal) => FindPath(start,goal,CancellationToken.None);
+        public static LinkedList<Edge> FindPath(Node start,Node goal,CancellationToken token,Func<Node,IEnumerable<Edge>> neighbours=null)
+        {
+            if(start==null || goal==null || !start.supported || !Walkable(goal))return new LinkedList<Edge>();
+            // h=0 is intentional: transit costs may be lower than their geometric distance.
+            var costs=new Dictionary<Node,float>{{start,0}};var parents=new Dictionary<Node,Edge>();var queue=new SimplePriorityQueue<Entry,float>();
+            queue.Enqueue(new Entry(start,0),0);
+            while(queue.Count>0)
+            {
+                token.ThrowIfCancellationRequested();var entry=queue.Dequeue();var n=entry.Node;
+                if(entry.G>costs[n])continue;
+                if(n==goal)return Rebuild(start,goal,parents);
+                foreach(var edge in neighbours!=null?neighbours(n):n.edges)
                 {
-                    Edge e = current.edges[i];
-
-                    //Check if we visited the outer end of the edge
-                    if (Visited.Contains(e.end.pos))
-                        continue;
-
-                    temp_gCost = gScore[current.pos] + e.weight;
-
-                    //If new value is not better then do nothing
-                    if (gScore.TryGetValue(e.end.pos, out prev_gCost) && temp_gCost >= prev_gCost)
-                        continue;
-
-                    //Otherwise store the new value and add the destination into the queue
-                    Parent[e.end.pos] = e;
-                    gScore[e.end.pos] = temp_gCost;
-
-                    pq.Enqueue(e.end, temp_gCost + EuclidianDistance(e.end, dest));
+                    if(!CanTraverse(edge))continue;float g=entry.G+edge.weight;
+                    if(costs.TryGetValue(edge.end,out float best)&&g>=best)continue;
+                    costs[edge.end]=g;parents[edge.end]=edge;queue.Enqueue(new Entry(edge.end,g),g);
                 }
             }
-
             return new LinkedList<Edge>();
         }
-
-        /// <summary>
-        /// Jump point search pathfinding
-        /// </summary>
-        /// <param name="start">Start node</param>
-        /// <param name="goal">Final node</param>
-        /// <returns>Returns path from the start node to goal node</returns>
-        public static LinkedList<Edge> FindPathJPS(Node start, Node goal)
+        public static Dictionary<Node,float> FindReachable(Node start,float budget,CancellationToken token=default,Func<Node,IEnumerable<Edge>> neighbours=null)
         {
-            HashSet<Vector3> Visited = new();
-            Dictionary<Vector3, float> gScore = new();
-
-            SimplePriorityQueue<Edge, float> pq = new();
-            var trackDFS = new BackTrack();
-
-            gScore[start.pos] = 0;
-            var startEdge = new Edge(null, start, EdgeType.INTRA, 0);
-            trackDFS.AddEdge(start.pos, startEdge, null);
-            pq.Enqueue(startEdge, EuclidianDistance(start, goal));
-            Edge current;
-
-            while (pq.Count > 0)
+            var costs=new Dictionary<Node,float>();if(start==null||!start.supported||budget<0)return costs;
+            var queue=new SimplePriorityQueue<Entry,float>();costs[start]=0;queue.Enqueue(new Entry(start,0),0);
+            while(queue.Count>0)
             {
-                current = pq.Dequeue();
-
-                if (current.end.pos.Equals(goal.pos))
+                token.ThrowIfCancellationRequested();var entry=queue.Dequeue();if(entry.G>costs[entry.Node])continue;
+                foreach(var edge in neighbours!=null?neighbours(entry.Node):entry.Node.edges)
                 {
-                    //Rebuild path and return it
-                    var path = RebuildPathJPS(trackDFS, current.end.pos);
-                    return path;
-                }
-
-                Visited.Add(current.end.pos);
-
-                var neighbours = current.PrunedNeighbors();
-                foreach (var neighbour in neighbours)
-                {
-                    if (Visited.Contains(neighbour.end.pos))
-                    {
-                        continue;
-                    }
-
-                    Edge jumpNode = Jump(neighbour, goal);
-                    if (jumpNode != null)
-                    {
-                        trackDFS.AddEdge(jumpNode.end.pos, jumpNode, current.end.pos);
-                        var score = gScore[current.end.pos] + EuclidianDistance(current.end, jumpNode.end);
-                        gScore[jumpNode.end.pos] = score;
-                        pq.Enqueue(jumpNode, score + EuclidianDistance(jumpNode.end, goal));
-                    }
+                    if(!CanTraverse(edge))continue;float g=entry.G+edge.weight;
+                    if(g>budget+.00001f || costs.TryGetValue(edge.end,out float best)&&g>=best)continue;
+                    costs[edge.end]=g;queue.Enqueue(new Entry(edge.end,g),g);
                 }
             }
-
+            return costs;
+        }
+        private static Node Next(Node n,int dx,int dz)
+        {
+            var next=Raw(n,dx,dz);return Walkable(next)&&(dx==0||dz==0||Open(n,dx,0)&&Open(n,0,dz))?next:null;
+        }
+        private static Node Jump(Node origin,int dx,int dz,Node goal,CancellationToken token)
+        {
+            var n=Next(origin,dx,dz);
+            while(n!=null)
+            {
+                token.ThrowIfCancellationRequested();if(n==goal)return n;
+                if(dx!=0&&dz!=0)
+                { if(Jump(n,dx,0,goal,token)!=null||Jump(n,0,dz,goal,token)!=null)return n; }
+                else if(dx!=0)
+                { if(Open(n,0,-1)&&!Open(n,-dx,-1)||Open(n,0,1)&&!Open(n,-dx,1))return n; }
+                else
+                { if(Open(n,-1,0)&&!Open(n,-1,-dz)||Open(n,1,0)&&!Open(n,1,-dz))return n; }
+                n=Next(n,dx,dz);
+            }
+            return null;
+        }
+        private static IEnumerable<Node> Pruned(Node n,Node parent)
+        {
+            if(parent==null)
+            { for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++)if(x!=0||z!=0){var p=Next(n,x,z);if(p!=null)yield return p;}yield break; }
+            int dx=Math.Sign(n.pos.x-parent.pos.x),dz=Math.Sign(n.pos.z-parent.pos.z);
+            if(dx!=0&&dz!=0)
+            {
+                var a=Next(n,dx,0);if(a!=null)yield return a;
+                var b=Next(n,0,dz);if(b!=null)yield return b;
+                var c=Next(n,dx,dz);if(c!=null)yield return c;
+            }
+            else
+            {
+                var forward=Next(n,dx,dz);if(forward!=null)yield return forward;
+                for(int sign=-1;sign<=1;sign+=2)
+                {
+                    int sx=dx==0?sign:0,sz=dz==0?sign:0;
+                    var side=Next(n,sx,sz);if(side!=null)yield return side;
+                    if(forward!=null){var diagonal=Next(n,dx+sx,dz+sz);if(diagonal!=null)yield return diagonal;}
+                }
+            }
+        }
+        /// <summary>Online JPS for regular, horizontal, uniform-distance grids. Use FindPath for weighted/transit graphs.</summary>
+        public static LinkedList<Edge> FindPathJPS(Node start,Node goal) => FindPathJPS(start,goal,CancellationToken.None);
+        public static LinkedList<Edge> FindPathJPS(Node start,Node goal,CancellationToken token)
+        {
+            var path=FindGridPath(start,goal,token);
+            if(start!=null&&goal!=null&&(start==goal||path.Count>0))path.AddFirst(new Edge(null,start,EdgeType.INTRA,0));
+            return path;
+        }
+        internal static LinkedList<Edge> FindGridPath(Node start,Node goal,CancellationToken token)
+        {
+            if(start==null||goal==null||!start.supported||!Walkable(goal))return new LinkedList<Edge>();
+            var costs=new Dictionary<Node,float>{{start,0}};var parents=new Dictionary<Node,Edge>();var queue=new SimplePriorityQueue<Entry,float>();
+            queue.Enqueue(new Entry(start,0),EuclidianDistance(start,goal));
+            while(queue.Count>0)
+            {
+                token.ThrowIfCancellationRequested();var entry=queue.Dequeue();var n=entry.Node;
+                if(entry.G>costs[n])continue;if(n==goal)return Rebuild(start,goal,parents);
+                parents.TryGetValue(n,out var predecessor);
+                foreach(var neighbour in Pruned(n,predecessor?.start))
+                {
+                    int dx=Math.Sign(neighbour.pos.x-n.pos.x),dz=Math.Sign(neighbour.pos.z-n.pos.z);
+                    var jump=Jump(n,dx,dz,goal,token);if(jump==null)continue;
+                    float distance=EuclidianDistance(n,jump),g=entry.G+distance;
+                    if(costs.TryGetValue(jump,out float best)&&g>=best)continue;
+                    costs[jump]=g;parents[jump]=new Edge(n,jump,EdgeType.INTRA,distance);
+                    queue.Enqueue(new Entry(jump,g),g+EuclidianDistance(jump,goal));
+                }
+            }
             return new LinkedList<Edge>();
         }
-
-        /// <summary>
-        /// Check if current step edge is forced node or the goal node we search for
-        /// </summary>
-        /// <param name="step">Step edge we checking</param>
-        /// <param name="goal">Searched node</param>
-        /// <returns>Return current edge if is forced node or searched node</returns>
-        private static Edge Jump(Edge step, Node goal)
+        public static LinkedList<Edge> ReversePath(IEnumerable<Edge> path)
         {
-            var direction = step.direction;
-            var stepNode = step.end;
-            
-            if (stepNode.obstacle)
-            {
-                return null;
-            }
-            if (stepNode.pos.Equals(goal.pos))
-            {
-                return step;
-            }
-            if (stepNode.HasForcedNodes(direction))
-            {
-                return step;
-            }
-            //Diagonal
-            if (!cardinals.Contains(direction))
-            {
-                foreach ( Direction d in SplitDiagonalDirection(direction))
-                {
-                    if (Jump(step, d, goal) != null)
-                    {
-                        return step;
-                    }
-                }
-            }
-
-            return Jump(step, direction, goal);
-        }
-
-        /// <summary>
-        /// Stepping iteration until find next forced node or goal node
-        /// </summary>
-        /// <param name="edge">Edge we stepping from</param>
-        /// <param name="direction">Direction we stepping to</param>
-        /// <param name="goal">Goal node</param>
-        /// <returns>Return next forced node, goal node or null of no valid node find in this direction</returns>
-        private static Edge Jump(Edge edge, Direction direction, Node goal)
-        {
-            var step = Step(edge, direction);
-            
-            if (step == null)
-            {
-                return null;
-            }
-            
-            var stepNode = step.end;
-            if (stepNode.obstacle)
-            {
-                return null;
-            }
-            if (stepNode.pos.Equals(goal.pos))
-            {
-                return step;
-            }
-
-            var nextStep = Step(step, direction);
-            if (nextStep != null)
-            {
-                if (!nextStep.end.obstacle && stepNode.HasForcedNodes(direction))
-                {
-                    return step;
-                }
-            }
-            
-            //Diagonal
-            if (!cardinals.Contains(direction))
-            {
-                foreach ( Direction d in SplitDiagonalDirection(direction))
-                {
-                    if (Jump(step, d, goal) != null)
-                    {
-                        return step;
-                    }
-                }
-            }
-
-            return Jump(step, direction, goal);
-        }
-        
-        /// <summary>
-        /// Get the list of cardinal directions
-        /// </summary>
-        /// <returns>Return all cardinal direction clock wise fashion</returns>
-        private static List<Direction> GetCardinalDirections()
-        {
-            return new()
-            {
-                Direction.North,
-                Direction.East,
-                Direction.South,
-                Direction.West,
-            };
-        }
-
-        /// <summary>
-        /// Stepping from this edge to set direction to get next edge 
-        /// </summary>
-        /// <param name="edge">Edge we stepping from</param>
-        /// <param name="dir">Direction we stepping to</param>
-        /// <returns>Next edge</returns>
-        public static Edge Step(Edge edge, Direction dir)
-        {
-            return edge.end.edges.Find(e => e.direction == dir);
-        }
-
-        /// <summary>
-        /// Split diagonal direction in separate directions
-        /// </summary>
-        /// <param name="dir">Direction</param>
-        /// <returns>Array of split directions</returns>
-        public static Direction[] SplitDiagonalDirection(Direction dir)
-        {
-            int dirInt = (int)dir;
-            var first = Mathf.Pow(2, Mathf.Floor(Mathf.Log(dirInt, 2)));
-            var second = dirInt - first;
-
-            return new Direction[2] { (Direction)first, (Direction)second };
-        }
-        
-        /// <summary>
-        /// Rebuild path from dest edge to start edge
-        /// </summary>
-        /// <param name="Parent">Path dictionary</param>
-        /// <param name="dest">Goal node</param>
-        /// <returns>Path from start edge to goal edge</returns>
-        private static LinkedList<Edge> RebuildPath(Dictionary<Vector3, Edge> Parent, Node dest)
-        {
-            LinkedList<Edge> res = new LinkedList<Edge>();
-            var current = dest.pos;
-            Edge e = null;
-
-            while (Parent.TryGetValue(current, out e))
-            {
-                res.AddFirst(e);
-                current = e.start.pos;
-            }
-
-            return res;
-        }
-
-        /// <summary>
-        /// Rebuild path from dest edge to start edge
-        /// </summary>
-        /// <param name="track">Deep first search instance</param>
-        /// <param name="dest">Destination</param>
-        /// <returns></returns>
-        private static LinkedList<Edge> RebuildPathJPS(BackTrack track, Vector3 dest)
-        {
-            return track.Start(dest);
+            var result=new LinkedList<Edge>();foreach(var e in path)
+            { if(e.start!=null)result.AddFirst(new Edge(e.end,e.start,e.type,e.weight){IsTransition=e.IsTransition}); }return result;
         }
     }
 }
