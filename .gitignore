@@ -85,3 +85,4 @@ debug.log
 # Headless test build outputs
 **/bin/
 **/obj/
+!/Tests~/Core/CoreTests.csproj

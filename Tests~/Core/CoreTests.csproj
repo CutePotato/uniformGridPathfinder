@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><LangVersion>9</LangVersion></PropertyGroup>
+<ItemGroup><Compile Include="UnityShim.cs"/><Compile Include="Program.cs"/>
+<Compile Include="../../Runtime/HPA/*.cs"/><Compile Include="../../Runtime/JPS/*.cs"/><Compile Include="../../Runtime/Navigation/*.cs"/>
+<Compile Include="../../Runtime/Data.cs"/><Compile Include="../../Runtime/Utilities/MathHelper.cs"/><Compile Include="../../Runtime/Attribute/ReadOnlyAttribute.cs"/>
+<Reference Include="PriorityQueue"><HintPath>../../DLLs/PriorityQueue.dll</HintPath></Reference></ItemGroup></Project>
