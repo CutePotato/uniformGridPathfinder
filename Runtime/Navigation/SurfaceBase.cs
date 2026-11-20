@@ -27,7 +27,7 @@ namespace UniformGridPathfinder.Navigation
             if(string.IsNullOrEmpty(surfaceId))surfaceId=Guid.NewGuid().ToString("N");
             data=new Data(transform.position,size);_map=GetComponentInParent<Map>();
         }
-        public virtual void Bake(){baked=false;data=new Data(transform.position,size);CreateNodes();Revision++;baked=true;}
+        public virtual void Bake(){if(string.IsNullOrEmpty(surfaceId))surfaceId=Guid.NewGuid().ToString("N");baked=false;data=new Data(transform.position,size);CreateNodes();Revision++;baked=true;}
         protected void CreateNodes()
         {
             if(cellSize<=0||float.IsNaN(cellSize)||float.IsInfinity(cellSize))throw new InvalidOperationException("Cell size must be finite and positive.");

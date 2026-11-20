@@ -79,6 +79,12 @@ class Program
    s.SetObstacle(Cell(s,4,0).pos,true);Check(!m.CaptureSnapshot().IsRouteValid(path),"New blocker ignored");
    s.SetObstacle(Cell(s,4,0).pos,false);s.SetSupported(Cell(s,3,0).pos,false);Check(!m.CaptureSnapshot().IsRouteValid(path),"Hole ignored");
   });
+  Test("removed surfaces release caches and baked IDs distinguish floors",()=>
+  {
+   var a=Surface(0,0,0);var b=Surface(0,2,0);var m=Map(a,b);m.CaptureSnapshot();
+   Check(Cell(a,0,0).Id.Surface!=Cell(b,0,0).Id.Surface,"Surface identities collided");
+   m.surfaces=new[]{a};m.CaptureSnapshot();Check(m.CachedRegionCount==1,"Removed surface cache retained");
+  });
   Console.WriteLine("ALL "+passed+" TEST GROUPS PASSED");
  }
 }

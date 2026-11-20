@@ -70,6 +70,8 @@ namespace UniformGridPathfinder.Navigation
         {
             lock(gate)
             {
+                foreach(var removed in regions.Keys.Where(surface=>!surfaces.Contains(surface)).ToArray())
+                {regions.Remove(removed);Version++;}
                 var captured=new List<NavigationSnapshot.Region>();
                 foreach(var surface in surfaces)
                 {
